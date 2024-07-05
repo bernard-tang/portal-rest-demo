@@ -11,13 +11,13 @@ import { post } from '../utils/apiUtils'
 
 export function Login() {
 
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
 
   const [password, setPassword] = useState("");
 
   function validateForm() {
 
-    return email.length > 0 && password.length > 0;
+    return username.length > 0 && password.length > 0;
 
   }
 
@@ -26,15 +26,19 @@ export function Login() {
 
     event.preventDefault();
     try {
-      const newTodoData = await post(`/auth/login`, {
-        username: email,
+      const response = await post(`/auth/login`, {
+        username: username,
         password: password, // Example: Setting completed to false by default
       });
       // const newTodoData = await httpRequest('POST', '/auth/login', {
-      //   username: email,
+      //   username: username,
       //   password: password, // Example: Setting completed to false by default
       // });
-      console.log('New todo created:', newTodoData);
+      const token = response;
+      localStorage.setItem('jwtToken', token); // Save token after successful login
+      // Redirect or navigate to authenticated route
+
+      console.log('New todo created:', response);
       // You can handle the response here, e.g., update state, show success message, etc.
       setNewTodoTitle(''); // Clear input field after successful creation
     } catch (error) {
@@ -50,7 +54,7 @@ export function Login() {
 
       <Form onSubmit={handleSubmit}>
 
-        <Form.Group size="lg" controlId="email">
+        <Form.Group size="lg" controlId="username">
 
           <Form.Label>Email</Form.Label>
 
@@ -58,11 +62,11 @@ export function Login() {
 
             autoFocus
 
-            type="email"
+            type="text"
 
-            value={email}
+            value={username}
 
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
 
           />
 
