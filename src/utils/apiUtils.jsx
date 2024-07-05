@@ -14,8 +14,14 @@ const axiosInstance = axios.create({
 
 // Axios interceptor to handle errors globally
 axiosInstance.interceptors.response.use(
-  response => response,
-  error => {
+  (config) => {
+    const token = localStorage.getItem('jwtToken');
+    if (token && !config.url.endsWith('/login')) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
     console.error('API Error:', error);
     throw error;
   }
