@@ -7,9 +7,11 @@ import Button from "react-bootstrap/Button";
 
 import "./Login.css";
 
-import { post } from '../utils/apiUtils'
+import { useAuth } from "../utils/authContext";
 
 export function Login() {
+
+  const { login } = useAuth(); // Destructure login function from useAuth hook
 
   const [username, setUsername] = useState("");
 
@@ -25,25 +27,13 @@ export function Login() {
   const handleSubmit = async (event) => {
 
     event.preventDefault();
+    
     try {
-      const response = await post(`/auth/login`, {
-        username: username,
-        password: password, // Example: Setting completed to false by default
-      });
-      // const newTodoData = await httpRequest('POST', '/auth/login', {
-      //   username: username,
-      //   password: password, // Example: Setting completed to false by default
-      // });
-      const token = response;
-      localStorage.setItem('jwtToken', token); // Save token after successful login
-      // Redirect or navigate to authenticated route
-
-      console.log('New todo created:', response);
-      // You can handle the response here, e.g., update state, show success message, etc.
-      setNewTodoTitle(''); // Clear input field after successful creation
+      await login(username, password);
+      // If login succeeds, you can redirect the user or perform other actions
     } catch (error) {
-      console.error('Error creating todo:', error);
-      // Handle error state or show error message to user
+      // setError('Invalid username or password');
+      console.error('Login error:', error);
     }
 
   }
