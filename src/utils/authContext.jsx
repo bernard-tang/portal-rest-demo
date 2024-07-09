@@ -2,7 +2,7 @@
 
 import React, { createContext, useState, useContext } from 'react';
 
-import { post } from './apiUtils'
+import { post, signIn } from './apiUtils'
 
 const AuthContext = createContext();
 
@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoggedIn(true);
     // You can add logic to retrieve and set JWT token here
     try {
-      const response = await post(`/auth/login`, {
+      const response = await signIn(`/auth/login`, {
         username: username,
         password: password, // Example: Setting completed to false by default
       });
@@ -35,8 +35,19 @@ export const AuthProvider = ({ children }) => {
 
   };
 
-  const logout = () => {
+  const logout = async () => {
     setIsLoggedIn(false);
+
+    try {
+      const response = await post(`/auth/logout`, {});
+
+      localStorage.removeItem('jwtToken');
+
+      return true;
+    } catch (error) {
+      return false;
+    }
+
     // You may want to clear JWT token from localStorage here
   };
 

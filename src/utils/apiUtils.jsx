@@ -4,28 +4,48 @@ import axios from 'axios';
 
 const baseURL = 'http://localhost:8080'; // Replace with your backend API URL
 
-const axiosInstance = axios.create({
+const headerPayload = {
   baseURL,
   headers: {
     'Content-Type': 'application/json',
+    
     // Add any headers you need for your requests
   },
-});
+};
+
+// const axiosInstance = axios.create({
+//   baseURL,
+//   headers: {
+//     'Content-Type': 'application/json',
+//     // Add any headers you need for your requests
+//   },
+// });
 
 // Axios interceptor to handle errors globally
-axiosInstance.interceptors.response.use(
-  (config) => {
-    const token = localStorage.getItem('jwtToken');
-    if (token && !config.config.url.endsWith('/login')) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    console.error('API Error:', error);
-    throw error;
+// axiosInstance.interceptors.response.use(
+//   (config) => {
+//     const token = localStorage.getItem('jwtToken');
+//     if (token) {
+//       config.headers.Authorization = `Bearer ${token}`;
+//     }
+//     return config;
+//   },
+//   (error) => {
+//     console.error('API Error:', error);
+//     throw error;
+//   }
+// );
+
+const getHeaderPayload = () => {
+  const token = localStorage.getItem('jwtToken');
+
+  if(token){
+      var tokenHeaderPayload = headerPayload;
+      tokenHeaderPayload.headers.Authorization = `Bearer ${token}`
+      return tokenHeaderPayload;
   }
-);
+  return headerPayload;
+}
 
 // Function to handle API errors
 const handleAPIError = error => {
@@ -34,9 +54,20 @@ const handleAPIError = error => {
     throw error;
   };
 
+export const signIn = async (url, data = {}) => {
+    try {
+      const instance = axios.create(getHeaderPayload());
+      const response = await instance.post(url, data);
+      return response.data;
+    } catch (error) {
+      handleAPIError(error);
+    }
+  };
+
 export const get = async (url, params = {}) => {
   try {
-    const response = await axiosInstance.get(url, { params });
+    const instance = axios.create(getHeaderPayload());
+    const response = await instance.get(url, { params });
     return response.data;
   } catch (error) {
     handleAPIError(error);
@@ -45,7 +76,8 @@ export const get = async (url, params = {}) => {
 
 export const post = async (url, data = {}) => {
   try {
-    const response = await axiosInstance.post(url, data);
+    const instance = axios.create(getHeaderPayload());
+    const response = await instance.post(url, data);
     return response.data;
   } catch (error) {
     handleAPIError(error);
@@ -55,7 +87,8 @@ export const post = async (url, data = {}) => {
 // PUT method
 export const put = async (url, data = {}) => {
     try {
-      const response = await axiosInstance.put(url, data);
+      const instance = axios.create(getHeaderPayload());
+      const response = await instance.put(url, data);
       return response.data;
     } catch (error) {
       handleAPIError(error);
@@ -65,7 +98,8 @@ export const put = async (url, data = {}) => {
   // DELETE method (example)
   export const del = async (url) => {
     try {
-      const response = await axiosInstance.delete(url);
+      const instance = axios.create(getHeaderPayload());
+      const response = await instance.delete(url);
       return response.data;
     } catch (error) {
       handleAPIError(error);
@@ -76,7 +110,8 @@ export const put = async (url, data = {}) => {
   export const fetchResource = async (resource, params = {}) => {
     const url = `${baseURL}/${resource}`;
     try {
-      const response = await axiosInstance.get(url, { params });
+      const instance = axios.create(getHeaderPayload());
+      const response = await instance.get(url, { params });
       return response.data;
     } catch (error) {
       handleAPIError(error);

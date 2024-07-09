@@ -9,6 +9,8 @@ import "./Login.css";
 
 import { useAuth } from "../utils/authContext";
 
+import { useNavigate } from 'react-router-dom';
+
 export function Login() {
 
   const { login } = useAuth(); // Destructure login function from useAuth hook
@@ -16,6 +18,8 @@ export function Login() {
   const [username, setUsername] = useState("");
 
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   function validateForm() {
 
@@ -29,8 +33,12 @@ export function Login() {
     event.preventDefault();
     
     try {
-      await login(username, password);
+      const loggedIn = await login(username, password);
       // If login succeeds, you can redirect the user or perform other actions
+
+      if(loggedIn) {
+        navigate('/Home'); 
+      }
     } catch (error) {
       // setError('Invalid username or password');
       console.error('Login error:', error);

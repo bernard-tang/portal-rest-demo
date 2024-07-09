@@ -23,26 +23,33 @@ function App() {
             <Route path="/About" element={<About/>}/>
             <Route path="/Contact" element={<Contact/>}/>
           </Route> */}
-           <Route path="/" element={<Login />} />
-            <Route path="/Login" element={<Login />} />
-            <Route element={<Layout/>}>
+          {/* <Route path="/Login" element={<Login/>}/>
+          <Route element={<Layout/>}>
+            <Route path="/Home" element={<Home/>}/>
+            <Route path="/Products" element={<Products/>}/>
+            <Route path="/About" element={<About/>}/>
+            <Route path="/Contact" element={<Contact/>}/>
+          </Route> */}
+          <Route path="/" element={<Login />} />
+          <Route path="/Login" element={<Login />} />
+          <Route element={<Layout/>}>
             <Route path="/Home" element={
               <ProtectedRoute>
                 <Home/>
               </ProtectedRoute>}/>
             <Route path="/Products" element={
-                <ProtectedRoute>
-                  <Products />
-                </ProtectedRoute>}/>
+              <ProtectedRoute>
+                <Products />
+              </ProtectedRoute>}/>
             <Route path="/About" element={
-                <ProtectedRoute>
-                  <About />
-                </ProtectedRoute>}/>
+              <ProtectedRoute>
+                <About />
+              </ProtectedRoute>}/>
             <Route path="/Contact" element={
-                <ProtectedRoute>
-                  <Contact />
-                </ProtectedRoute>}/>
-            </Route>
+              <ProtectedRoute>
+                <Contact />
+              </ProtectedRoute>}/>
+          </Route>
         </Routes>
       </Router>
     </AuthProvider>
