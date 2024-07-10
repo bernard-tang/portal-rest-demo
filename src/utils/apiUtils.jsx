@@ -44,6 +44,11 @@ const getHeaderPayload = () => {
       tokenHeaderPayload.headers.Authorization = `Bearer ${token}`
       return tokenHeaderPayload;
   }
+  else {
+    delete headerPayload.headers.Authorization
+
+    return headerPayload;
+  }
   return headerPayload;
 }
 
