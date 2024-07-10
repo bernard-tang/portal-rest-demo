@@ -11,9 +11,10 @@ export function Navbar() {
     const handleLogout = async (event) => {
         const loggedout = await logout();
 
-        if(loggedout) {
-            navigate('/Login'); 
-        }
+        // if(loggedout) {
+        //     // navigate('/Login'); 
+        //     localStorage.removeItem('jwtToken');
+        // }
 
     }
     return (
@@ -23,7 +24,7 @@ export function Navbar() {
             <Link to="/Products"><button className="navbutton">Products</button></Link>
             <Link to="/About"><button className="navbutton">About Us</button></Link>
             <Link to="/Contact"><button className="navbutton">Contact Us</button></Link>
-            <button className="navbutton" onClick={handleLogout}>Logout</button>
+            <Link to="/"><button className="navbutton" onClick={handleLogout}>Logout</button></Link>
         </div>
     )
 }
