@@ -11,6 +11,8 @@ import { useAuth } from "../utils/authContext";
 
 import { useNavigate } from 'react-router-dom';
 
+import defaultBannerImage from '../assets/bg.jpeg';
+
 export function Login() {
 
   const { login } = useAuth(); // Destructure login function from useAuth hook
@@ -18,6 +20,9 @@ export function Login() {
   const [username, setUsername] = useState("");
 
   const [password, setPassword] = useState("");
+
+  // State to handle login error
+  const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
 
@@ -39,24 +44,37 @@ export function Login() {
       if(loggedIn) {
         navigate('/Home'); 
       }
+      else
+      {
+        throw new Error('Invalid username or password');
+      }
     } catch (error) {
       // setError('Invalid username or password');
       console.error('Login error:', error);
+      // Set the error message
+      setErrorMessage(error.message);
     }
 
   }
 
   return (
 
-    <div className="Login">
-
+    <div className="login-banner">
+    <div className="banner-image">
+      <img src={defaultBannerImage} alt="Banner" />
+    </div>
+    <div className="login-form">
+      <h2>Login</h2>
       <Form onSubmit={handleSubmit}>
 
-        <Form.Group size="lg" controlId="username">
+        {/* <Form.Group size="lg" controlId="username"> */}
 
-          <Form.Label>Email</Form.Label>
+          <div className="form-group">
 
-          <Form.Control
+          {/* <Form.Label>Email</Form.Label> */}
+          <label htmlFor="username">Username</label>
+
+          {/* <Form.Control
 
             autoFocus
 
@@ -66,15 +84,25 @@ export function Login() {
 
             onChange={(e) => setUsername(e.target.value)}
 
-          />
+          /> */}
+          <input
+              type="text"
+              id="username"
+              name="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
 
-        </Form.Group>
+        {/* </Form.Group> */}
 
-        <Form.Group size="lg" controlId="password">
+        {/* <Form.Group size="lg" controlId="password"> */}
+        <div className="form-group">
+        <label htmlFor="password">Password</label>
 
-          <Form.Label>Password</Form.Label>
+          {/* <Form.Label>Password</Form.Label> */}
 
-          <Form.Control
+          {/* <Form.Control
 
             type="password"
 
@@ -82,9 +110,19 @@ export function Login() {
 
             onChange={(e) => setPassword(e.target.value)}
 
-          />
+          /> */}
+          <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
 
-        </Form.Group>
+          </div>
+
+        {/* </Form.Group> */}
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
 
         <Button block size="lg" type="submit" disabled={!validateForm()}>
 
@@ -93,8 +131,21 @@ export function Login() {
         </Button>
 
       </Form>
-
+      {/* <form>
+        <div>
+          <label htmlFor="username">Username</label>
+          <input type="text" id="username" name="username" />
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input type="password" id="password" name="password" />
+        </div>
+        <button type="submit">Login</button>
+      </form> */}
     </div>
+    </div>
+
+
 
   );
 
