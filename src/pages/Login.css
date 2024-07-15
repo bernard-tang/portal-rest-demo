@@ -1,0 +1,86 @@
+/* src/components/LoginBanner.css */
+.login-banner {
+    display: flex;
+    height: 100vh; /* Full viewport height */
+  }
+  
+  .banner-image {
+    flex: 1;
+    background: #f0f0f0; /* Optional background color */
+  }
+  
+  .banner-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure image covers the container */
+  }
+  
+  .login-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: #fff; /* Background color for the form */
+  }
+  
+  .login-form h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333; /* Dark color for the heading */
+  }
+  
+  .login-form form {
+    max-width: 600px; /* Width of the form */
+    width: 100%;
+  }
+  
+  .form-group {
+    display: flex; /* Flexbox for side-by-side alignment */
+    align-items: center; /* Vertically center items */
+    margin-bottom: 15px;
+    width: 100%; /* Full width for alignment */
+  }
+  
+  .form-group label {
+    flex: 0 0 120px; /* Fixed width for labels */
+    margin-right: 10px; /* Space between label and input */
+    font-weight: bold; /* Makes labels stand out */
+    color: #333; /* Dark color for labels */
+    font-size: 14px; /* Font size for labels */
+    text-align: right; /* Align text to the right for better label alignment */
+  }
+  
+  .form-group input {
+    flex: 1; /* Take up remaining space */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+  }
+  
+  .login-form button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background: #007bff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px; /* Font size for button text */
+    transition: background 0.3s; /* Smooth background color transition */
+  }
+  
+  .login-form button:hover {
+    background: #0056b3;
+  }
+
+  .error-message {
+    color: red;
+    margin-bottom: 15px;
+    font-size: 14px;
+    text-align: left; /* Align text to the left */
+    width: 100%; /* Full width to align with form fields */
+    padding-left: 130px; /* Space to align with form fields */
+  }
+  
