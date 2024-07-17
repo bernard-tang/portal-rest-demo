@@ -22,7 +22,8 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background: #fff; /* Background color for the form */
+    /* background: #fff; Background color for the form */
+    background-color: rgb(255, 253, 250);
   }
   
   .login-form h2 {
@@ -34,6 +35,15 @@
   .login-form form {
     max-width: 600px; /* Width of the form */
     width: 100%;
+  }
+
+  .login-panel {
+    width: 400px;
+    min-height: 350px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: .5rem;
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
   }
   
   .form-group {
