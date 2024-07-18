@@ -29,10 +29,12 @@ import Typography from '@mui/material/Typography';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
 // project imports
-import MainCard from 'ui-component/cards/MainCard';
-import Transitions from 'ui-component/extended/Transitions';
+import MainCard from '../../../../ui-component/cards/MainCard';
+import Transitions from '../../../../ui-component/extended/Transitions';
 import UpgradePlanCard from './UpgradePlanCard';
-import User1 from 'assets/images/users/user-round.svg';
+import User1 from '../../../../assets/images/users/user-round.svg';
+
+import { useAuth } from "../../../../utils/authContext";
 
 // assets
 import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons-react';
@@ -40,6 +42,7 @@ import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons-re
 // ==============================|| PROFILE MENU ||============================== //
 
 const ProfileSection = () => {
+  const { logout } = useAuth(); // Destructure logout function from useAuth hook
   const theme = useTheme();
   const customization = useSelector((state) => state.customization);
   const navigate = useNavigate();
@@ -55,6 +58,7 @@ const ProfileSection = () => {
   const anchorRef = useRef(null);
   const handleLogout = async () => {
     console.log('Logout');
+    const loggedout = await logout();
   };
 
   const handleClose = (event) => {

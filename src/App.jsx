@@ -12,6 +12,7 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, StyledEngineProvider } from '@mui/material';
 import { useSelector } from 'react-redux';
+import MainLayout from './layout/MainLayout';
 
 // defaultTheme
 import themes from './themes';
@@ -48,7 +49,7 @@ function App() {
               </Route> */}
               <Route path="/" element={<Login />} />
               <Route path="/Login" element={<Login />} />
-              <Route element={<Layout/>}>
+              <Route element={<MainLayout/>}>
                 <Route path="/Home" element={
                   <ProtectedRoute>
                     <Home/>

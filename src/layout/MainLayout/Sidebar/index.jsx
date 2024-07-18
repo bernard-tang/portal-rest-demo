@@ -15,9 +15,9 @@ import { BrowserView, MobileView } from 'react-device-detect';
 import MenuCard from './MenuCard';
 import MenuList from './MenuList';
 import LogoSection from '../LogoSection';
-import Chip from 'ui-component/extended/Chip';
+import Chip from '../../../ui-component/extended/Chip';
 
-import { drawerWidth } from 'store/constant';
+import { drawerWidth } from '../../../store/constant';
 
 // ==============================|| SIDEBAR DRAWER ||============================== //
 
