@@ -31,27 +31,19 @@ const icons = { IconBrandChrome, IconAddressBook, IconCircles };
 // };
 
 
-const other = {
-  id: 'others-roadmap',
+const users = {
+  id: 'users-roadmap',
   type: 'group',
   children: [
     {
-      id: 'about-us',
-      title: 'About Us',
+      id: 'users',
+      title: 'Users',
       type: 'item',
-      url: '/About',
+      url: '/Users',
       icon: icons.IconCircles,
-      breadcrumbs: false
-    },
-    {
-      id: 'contact',
-      title: 'Contact',
-      type: 'item',
-      url: '/Contact',
-      icon: icons.IconAddressBook,
       breadcrumbs: false
     }
   ]
 };
 
-export default other;
+export default users;

@@ -166,7 +166,7 @@ const ProfileSection = () => {
                       </Stack>
                       <Typography variant="subtitle2">Project Admin</Typography>
                     </Stack>
-                    <OutlinedInput
+                    {/* <OutlinedInput
                       sx={{ width: '100%', pr: 1, pl: 2, my: 2 }}
                       id="input-search-profile"
                       value={value}
@@ -181,14 +181,14 @@ const ProfileSection = () => {
                       inputProps={{
                         'aria-label': 'weight'
                       }}
-                    />
+                    /> */}
                     <Divider />
                   </Box>
                   <PerfectScrollbar style={{ height: '100%', maxHeight: 'calc(100vh - 250px)', overflowX: 'hidden' }}>
                     <Box sx={{ p: 2, pt: 0 }}>
-                      <UpgradePlanCard />
+                      {/* <UpgradePlanCard /> */}
                       <Divider />
-                      <Card
+                      {/* <Card
                         sx={{
                           bgcolor: theme.palette.primary.light,
                           my: 2
@@ -229,7 +229,7 @@ const ProfileSection = () => {
                             </Grid>
                           </Grid>
                         </CardContent>
-                      </Card>
+                      </Card> */}
                       <Divider />
                       <List
                         component="nav"

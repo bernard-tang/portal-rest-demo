@@ -3,8 +3,10 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import { About } from './pages/About'
 import { Contact } from './pages/Contact'
+import { Users } from './pages/Users'
 import { Home } from './pages/Home'
 import { Products } from './pages/Products'
+import { Categories } from './pages/Categories'
 import { Login } from './pages/Login'
 import { AuthProvider } from './utils/authContext'
 import React from 'react';
@@ -65,6 +67,14 @@ function App() {
                 <Route path="/Contact" element={
                   <ProtectedRoute>
                     <Contact />
+                  </ProtectedRoute>}/>
+                <Route path="/Users" element={
+                  <ProtectedRoute>
+                    <Users />
+                  </ProtectedRoute>}/>
+                <Route path="/Categories" element={
+                  <ProtectedRoute>
+                    <Categories />
                   </ProtectedRoute>}/>
               </Route>
             </Routes>
