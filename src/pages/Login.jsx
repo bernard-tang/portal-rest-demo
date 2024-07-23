@@ -64,73 +64,75 @@ export function Login() {
       <img src={defaultBannerImage} alt="Banner" />
     </div>
     <div className="login-form">
-      <h2>Login</h2>
-      <Form onSubmit={handleSubmit}>
+      <div className="login-panel">
+        <h2>Login</h2>
+        <Form onSubmit={handleSubmit}>
 
-        {/* <Form.Group size="lg" controlId="username"> */}
+          {/* <Form.Group size="lg" controlId="username"> */}
 
-          <div className="form-group">
+            <div className="form-group">
 
-          {/* <Form.Label>Email</Form.Label> */}
-          <label htmlFor="username">Username</label>
+            {/* <Form.Label>Email</Form.Label> */}
+            <label htmlFor="username">Username</label>
 
-          {/* <Form.Control
+            {/* <Form.Control
 
-            autoFocus
+              autoFocus
 
-            type="text"
-
-            value={username}
-
-            onChange={(e) => setUsername(e.target.value)}
-
-          /> */}
-          <input
               type="text"
-              id="username"
-              name="username"
+
               value={username}
+
               onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
 
-        {/* </Form.Group> */}
+            /> */}
+            <input
+                type="text"
+                id="username"
+                name="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
 
-        {/* <Form.Group size="lg" controlId="password"> */}
-        <div className="form-group">
-        <label htmlFor="password">Password</label>
+          {/* </Form.Group> */}
 
-          {/* <Form.Label>Password</Form.Label> */}
+          {/* <Form.Group size="lg" controlId="password"> */}
+          <div className="form-group">
+          <label htmlFor="password">Password</label>
 
-          {/* <Form.Control
+            {/* <Form.Label>Password</Form.Label> */}
 
-            type="password"
+            {/* <Form.Control
 
-            value={password}
-
-            onChange={(e) => setPassword(e.target.value)}
-
-          /> */}
-          <input
               type="password"
-              id="password"
-              name="password"
+
               value={password}
+
               onChange={(e) => setPassword(e.target.value)}
-            />
 
-          </div>
+            /> */}
+            <input
+                type="password"
+                id="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
 
-        {/* </Form.Group> */}
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
+            </div>
 
-        <Button block size="lg" type="submit" disabled={!validateForm()}>
+          {/* </Form.Group> */}
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
 
-          Login
+          <Button block size="lg" type="submit" disabled={!validateForm()}>
 
-        </Button>
+            Login
 
-      </Form>
+          </Button>
+
+        </Form>
+      </div>
       {/* <form>
         <div>
           <label htmlFor="username">Username</label>
