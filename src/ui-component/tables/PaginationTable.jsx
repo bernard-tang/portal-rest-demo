@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect, useState } from "react";
 import { styled } from '@mui/system';
 import {
   TablePagination,
@@ -8,10 +8,19 @@ import {
 const TableUnstyled = ({data, page, rowsPerPage, total, onOffsetChange, onLimitChange}) => {
 //   const [page, onOffsetChange] = React.useState(0);
 //   const [rowsPerPage, onLimitChange] = React.useState(5);
+const [tableHeaders, setTableHeaders] = useState([]);
+
+useEffect(() => {
+  if(data != null && data.length > 0) {
+    const columnNames = Object.keys(data[0]).filter(key => key !== "id");
+    setTableHeaders(columnNames);
+  }
+
+}, [ data ]);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
 
   const handleChangePage = (event, newPage) => {
     onOffsetChange(newPage);
@@ -23,20 +32,31 @@ const TableUnstyled = ({data, page, rowsPerPage, total, onOffsetChange, onLimitC
     onOffsetChange(0);
   };
 
+  const capitalizeWords = (str) => {
+    if (!str) return '';
+    return str
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
   return (
-    <Root sx={{ maxWidth: '100%', width: 500 }}>
+    <Root sx={{ maxWidth: '100%', width: 1000 }}>
       <table aria-label="custom pagination table">
         <thead>
           <tr>
-            <th>Dessert</th>
+            {/* <th>Dessert</th>
             <th>Calories</th>
-            <th>Fat</th>
+            <th>Fat</th> */}
+            {tableHeaders.map(columnName => (
+              <th>{capitalizeWords(columnName)}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
+          {/* {(rowsPerPage > 0
+            ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            : data
           ).map((row) => (
             <tr key={row.name}>
               <td>{row.name}</td>
@@ -47,12 +67,23 @@ const TableUnstyled = ({data, page, rowsPerPage, total, onOffsetChange, onLimitC
                 {row.fat}
               </td>
             </tr>
-          ))}
-          {emptyRows > 0 && (
+          ))} */}
+
+        {data != null ? data.map(row => (
+            <tr key={row.id}>
+              {tableHeaders.map(column => (
+                <td key={column}>{row[column]}</td>
+              ))}
+            </tr>
+          )) : <tr style={{ height: 41 * emptyRows }}>
+          <td colSpan={3} aria-hidden />
+        </tr> }
+
+          {/* {emptyRows > 0 && (
             <tr style={{ height: 41 * emptyRows }}>
               <td colSpan={3} aria-hidden />
             </tr>
-          )}
+          )} */}
         </tbody>
         <tfoot>
           <tr>
